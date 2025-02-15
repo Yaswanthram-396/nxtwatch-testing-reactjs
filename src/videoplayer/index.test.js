@@ -4,7 +4,6 @@ import { MemoryRouter } from "react-router-dom";
 import VideoPlayer from "./index";
 import ConfigurationContext from "../context";
 
-// Mock Context
 const mockContextValue = {
   handleSavedList: jest.fn(),
   mode: false,
