@@ -1,0 +1,108 @@
+div {
+  font-family: Roboto;
+}
+
+.loginField {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 25%;
+  height: 44%;
+  padding: 34px;
+  /* margin: auto; */
+  justify-content: space-between;
+  /* align-items: center; */
+  box-shadow: 0px 0px 25px #f1f1f1;
+
+  @media (max-width:600px) {
+    width: 56%;
+  }
+
+  @media (min-width:601px) and (max-width:600px) {
+    width: 56%;
+  }
+}
+
+.nxwLogin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.userInput {
+  height: 32px;
+  width: 94%;
+  border: 1px solid #cccccc;
+  padding: 5px;
+  padding-left: 12px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.loginButton {
+  padding: 10px 0px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #4f46e5;
+  color: #fff;
+  border: 0px;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.usernameCon {
+  display: flex;
+  flex-direction: column;
+  color: #909090;
+  gap: 8px;
+}
+
+.passwordCon {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #909090
+}
+
+.usernameHeading {
+  margin: 0px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.logoImage {
+  width: 50%;
+}
+
+.logoImageCon {
+  text-align: center;
+}
+
+.loginInputFildsBtn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inputsWithbtn {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+form {
+  display: flex;
+}
+
+.error {
+  margin: 0px;
+  margin-top: 8px;
+  color: #ff0b37;
+}

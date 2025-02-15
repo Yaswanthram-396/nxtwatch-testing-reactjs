@@ -1,0 +1,131 @@
+.video-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.video-item {
+  margin: 10px;
+  cursor: pointer;
+}
+
+.thumbnail {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.video-player {
+  margin: 0px 20px;
+  height: 100%;
+}
+
+.video {
+  width: 200px;
+}
+
+iframe {
+  width: 68vw;
+  height: 48vh;
+
+  @media (max-width:770px) {
+    width: 100%;
+    height: 40%;
+
+  }
+}
+
+.video-player {
+  /* margin: 0px 20px; */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+
+.video-thumbnail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-button {
+  width: 60px;
+  height: 60px;
+  background: url('https://assets.ccbp.in/frontend/react-js/nxt-watch/ibc-sol-1-img.png') no-repeat center center;
+  background-size: contain;
+}
+
+.ViewCount {
+  display: flex;
+  gap: 20px;
+}
+
+.Liked {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.media {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(204, 204, 204);
+  /* margin-right: 6%; */
+}
+
+.para {
+  color: rgb(148, 163, 184);
+  font-weight: 600;
+}
+
+.intenction {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profileInVideo {
+  width: 100%;
+}
+
+.heading {
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+.paragraphInThumb {
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+.image {
+  width: 5%;
+}
+
+.darkPara {
+  font-weight: 600;
+  font-size: 15px;
+  color: rgb(71, 85, 105);
+}
+
+.OuterIm {
+  align-items: center !important;
+}
+
+.totalVideo {
+  margin: 0px auto;
+  width: 69%;
+  height: 91vh;
+
+  @media (max-width:770px) {
+    width: 92%;
+  }
+}

@@ -1,0 +1,47 @@
+.SideContentbanner {
+    background-image: url(https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png);
+    background-size: cover;
+    /* width: 80vw; */
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.innerContainer {
+
+    background-image: url(https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png);
+    width: 100%;
+    height: 260px;
+    background-size: cover;
+    display: flex;
+    /* -webkit-box-pack: justify; */
+    justify-content: space-between;
+
+    /* padding: 30px; */
+    width: 100%;
+}
+
+.adContent {
+    padding-left: 30px;
+    width: 30%;
+    padding: 30px;
+    padding-top: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.AdBtn {
+    padding: 10px;
+    border: 1px solid black;
+    background-color: transparent;
+    border-radius: 3px;
+    align-self: flex-start;
+    cursor: pointer;
+}
+
+.closeIcon {
+    cursor: pointer;
+}
