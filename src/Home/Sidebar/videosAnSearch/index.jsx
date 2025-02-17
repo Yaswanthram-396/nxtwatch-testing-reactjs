@@ -15,6 +15,7 @@ class GetApiRes extends React.Component {
       searchInput: "",
       DataApi: { videos: [] },
       loading: true,
+      error: false,
     };
   }
 
@@ -40,6 +41,7 @@ class GetApiRes extends React.Component {
       );
 
       if (!response.ok) {
+        this.setState({ error: true });
         throw new Error("Failed to fetch data");
       }
 
@@ -96,7 +98,7 @@ class GetApiRes extends React.Component {
                 visible={true}
               />
             </div>
-          ) : videosArray.length > 0 ? (
+          ) : videosArray.length > 0 && !this.error ? (
             <div className="Videos">
               {videosArray.map((item) => (
                 <Link to={`/video/${item.id}`}>

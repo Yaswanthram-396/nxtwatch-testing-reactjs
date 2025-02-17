@@ -57,10 +57,12 @@ describe("Navbar Render", () => {
     });
   });
   test("to check the mode is getting applied while clicking the moon and sun icons", () => {
+    const mockHandleMode = jest.fn();
+    const mockSetStateStyle = jest.fn();
     const { rerender } = render(
       <MemoryRouter>
         <ConfigurationContext.Provider
-          value={{ mode: false, handlePage: () => {} }}
+          value={{ mode: false, handlePage: mockHandleMode }}
         >
           <Navbar />
         </ConfigurationContext.Provider>
@@ -74,7 +76,7 @@ describe("Navbar Render", () => {
     rerender(
       <MemoryRouter>
         <ConfigurationContext.Provider
-          value={{ mode: true, handlePage: () => {} }}
+          value={{ mode: true, handlePage: mockHandleMode }}
         >
           <Navbar />
         </ConfigurationContext.Provider>
@@ -84,5 +86,90 @@ describe("Navbar Render", () => {
     expect(screen.getByAltText("darkmodelogo")).toBeInTheDocument();
     expect(screen.queryByTestId("lightMode")).not.toBeInTheDocument();
     expect(screen.queryByAltText("lightmodelogo")).not.toBeInTheDocument();
+  });
+  // test("User logged out successfully after clicking logout button in mobile", async () => {
+  //   const { rerender } = render(
+  //     <MemoryRouter>
+  //       <Navbar />
+  //     </MemoryRouter>
+  //   );
+  //   expect(screen.queryByTestId("logout-popup")).toHaveStyle({
+  //     display: "none",
+  //   });
+
+  //   global.innerWidth = 400;
+  //   global.dispatchEvent(new Event("resize"));
+  //   rerender(
+  //     <MemoryRouter>
+  //       <Navbar />
+  //     </MemoryRouter>
+  //   );
+  //   await waitFor(() => {
+  //     expect(screen.getByTestId("logout-popup")).toHaveStyle({
+  //       display: "block",
+  //     });
+  //     // expect(screen.getByTestId("logoutSVG")).toBeInTheDocument();
+  //   });
+  // });
+  test("User logged out successfully after clicking logout button in mobile", async () => {
+    // Mock matchMedia for media queries in Jest
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      value: jest.fn().mockImplementation((query) => ({
+        matches: query === "(max-width: 770px)", // Simulate mobile view
+        media: query,
+        onchange: null,
+        addListener: jest.fn(),
+        removeListener: jest.fn(),
+      })),
+    });
+
+    render(
+      <MemoryRouter>
+        <Navbar />
+      </MemoryRouter>
+    );
+    expect(
+      screen.queryByText("Are you sure you want to logout?")
+    ).not.toBeInTheDocument();
+    expect(screen.getByTestId("logout-popup")).toBeInTheDocument();
+    fireEvent.click(screen.getByTestId("logout-popup"));
+    expect(
+      screen.getByText("Are you sure you want to logout?")
+    ).toBeInTheDocument();
+  });
+
+  test("dfg", () => {
+    const { rerender } = render(
+      <ConfigurationContext.Provider
+        value={{ mode: false, handleMode: () => {}, handlePage: () => {} }}
+      >
+        <MemoryRouter>
+          <Navbar />
+        </MemoryRouter>
+      </ConfigurationContext.Provider>
+    );
+    fireEvent.click(screen.getByTestId("logout-svg"));
+    expect(screen.getByTestId("panel-props")).toHaveStyle({
+      position: "absolute",
+    });
+    fireEvent.click(screen.getByText("Log out"));
+
+    expect(screen.getByTestId("poper-logout")).toHaveStyle({
+      backgroundColor: "#fff",
+    });
+    rerender(
+      <ConfigurationContext.Provider
+        value={{ mode: true, handleMode: () => {}, handlePage: () => {} }}
+      >
+        <MemoryRouter>
+          <Navbar />
+        </MemoryRouter>
+      </ConfigurationContext.Provider>
+    );
+    fireEvent.click(screen.getByText("Log out"));
+    expect(screen.getByTestId("poper-logout")).toHaveStyle({
+      backgroundColor: "rgb(33,33,33)",
+    });
   });
 });

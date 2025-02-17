@@ -113,8 +113,11 @@ li {
 }
 
 .logoutSVG {
-    @media (min-width:770px) {
-        display: none;
+
+    display: none;
+
+    @media (max-width:770px) {
+        display: block;
     }
 }
 

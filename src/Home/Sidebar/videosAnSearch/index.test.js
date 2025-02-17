@@ -61,7 +61,7 @@ describe("Render the videos from the API", () => {
   test("Rejected API", async () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
-        ok: true,
+        ok: false,
         json: () => Promise.reject(new Error("API Error")),
       })
     );

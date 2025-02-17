@@ -31,11 +31,12 @@ export function Panel({ props, setting }) {
   };
 
   return (
-    <div className="sidePanel" style={props}>
+    <div className="sidePanel" data-testid="panel-props" style={props}>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div style={{ textAlign: "end", paddingRight: "5%", paddingTop: "3%" }}>
           <FaTimes
             className="closeIcon"
+            data-testid="closeIcon-sidebar"
             onClick={() => setting({ display: "none" })}
           />
         </div>

@@ -46,7 +46,7 @@ describe("LoginPgeRender", () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
         ok: false,
-        json: Promise.resolve({}),
+        json: () => Promise.reject(new Error("API Error")),
       })
     );
     render(<LoginPage />);

@@ -73,4 +73,23 @@ describe("SidePanel", () => {
       expect(history.location.pathname).toBe("/NxtWatch/Saved");
     });
   });
+  test("closeIcon sidebar", async () => {
+    const history = createMemoryHistory();
+    const mockSetting = jest.fn();
+    render(
+      <HistoryRouter history={history}>
+        <ConfigurationContext.Provider
+          value={{ pagein: "Home", handlePage: () => {} }}
+        >
+          <Panel props={{}} setting={mockSetting} />
+        </ConfigurationContext.Provider>
+      </HistoryRouter>
+    );
+    fireEvent.click(screen.getByTestId("closeIcon-sidebar"));
+    await waitFor(() => {
+      expect(screen.getByTestId("panel-props")).toHaveStyle({
+        display: "block",
+      });
+    });
+  });
 });

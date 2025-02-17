@@ -10,35 +10,24 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   const { mode, handleMode } = useContext(ConfigurationContext);
   const [showpop, setpop] = useState(false);
+  const [StateStyle, setStateStyle] = useState({ display: "none" });
   const navigate = useNavigate();
   useEffect(() => {
     console.log(mode);
   }, [mode]);
-  const handleSet = () => {
-    handleMode();
-  };
+
   const handleRemove = () => {
     Cookies.remove("jwt_token");
     navigate("/");
   };
-  const [StateStyle, setStateStyle] = useState({ display: "none" });
 
-  const handleProfile = () => {
-    setStateStyle({
-      display: "block",
-      position: "absolute",
-      zIndex: 2,
-      top: "0",
-      left: "0",
-      backgroundColor: !mode ? "#fff" : "#000",
-    });
-  };
   return (
     <>
       {showpop ? (
         <div className="entirePop">
           <div
             className="poper"
+            data-testid="poper-logout"
             style={{
               position: "fixed",
               zIndex: "999",
@@ -50,8 +39,8 @@ const Navbar = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              justifyContent: "center",
               backgroundColor: !mode ? "#fff" : "rgb(33,33,33)",
+              justifyContent: "center",
               borderRadius: "10px",
             }}
           >
@@ -85,7 +74,7 @@ const Navbar = () => {
         </Link>
         <Panel props={StateStyle} setting={setStateStyle} />
         <div className="navbarList">
-          <li onClick={handleSet}>
+          <li onClick={handleMode}>
             {mode ? (
               <FaSun
                 data-testid="darkMode"
@@ -108,8 +97,18 @@ const Navbar = () => {
             />
             <FaBars
               className="logoutSVG"
+              data-testid="logout-svg"
               style={{ fontSize: "24px" }}
-              onClick={handleProfile}
+              onClick={() =>
+                setStateStyle({
+                  display: "block",
+                  position: "absolute",
+                  zIndex: 2,
+                  top: "0",
+                  left: "0",
+                  backgroundColor: !mode ? "#fff" : "#000",
+                })
+              }
             />
           </li>
           <button
@@ -120,6 +119,7 @@ const Navbar = () => {
           </button>
           <FaSignOutAlt
             className="logoutSVG"
+            data-testid="logout-popup"
             style={{ fontSize: "24px" }}
             title="logout"
             onClick={() => setpop(true)}

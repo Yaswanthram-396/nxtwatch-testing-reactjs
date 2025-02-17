@@ -75,7 +75,6 @@ describe("Gaming Component", () => {
       </MemoryRouter>
     );
 
-    // Wait for data to be fetched
     await waitFor(() => {
       expect(screen.queryByTestId("loader")).not.toBeInTheDocument();
     });
@@ -83,7 +82,6 @@ describe("Gaming Component", () => {
     const gamingVideosContainer = screen.getByTestId("gaming-videos");
     expect(gamingVideosContainer).toBeInTheDocument();
 
-    // Check light mode style
     expect(gamingVideosContainer).toHaveStyle({
       backgroundColor: "rgb(255,255,255)",
     });
