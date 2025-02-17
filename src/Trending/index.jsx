@@ -12,6 +12,7 @@ export default function Trending() {
   const [allData, setData] = useState([]);
   const [loading, setloading] = useState(false);
   const { mode } = useContext(ConfigurationContext);
+  const [error, setError] = useState(false);
   const fetchData = async () => {
     const cookieToken = Cookies.get("jwt_token");
     setloading(true);
@@ -28,11 +29,13 @@ export default function Trending() {
         throw new Error("Failed to fetch data");
       }
       const data = await response.json();
+      // console.log(data);
       setData(data.videos);
 
       setloading(false);
     } catch (error) {
       console.log("CATCH EXICUTED");
+      setError(true);
       console.error("Error fetching data:", error.message);
       setloading(false);
     }
@@ -52,7 +55,11 @@ export default function Trending() {
   return (
     <>
       <div className="trendingVIdeos">
-        <div className="tendingIcon" style={mode ? dark : light}>
+        <div
+          className="tendingIcon"
+          data-testid="trending-mode"
+          style={mode ? dark : light}
+        >
           <div
             className="iconback"
             style={
@@ -66,33 +73,39 @@ export default function Trending() {
           <h1 className="text-trend">Trending</h1>
         </div>
         {!loading ? (
-          allData.length > 0 && (
-            <div
-              className="ghnj"
-              style={mode ? { backgroundColor: "rgb(0,0,0)" } : null}
-            >
-              {allData.map((item) => (
-                <Link to={`/video/${item.id}`}>
-                  <div className="BG-container-2">
-                    <img
-                      src={item.thumbnail_url}
-                      alt="thumbnail_url"
-                      className="Video_photo"
-                    />
-                    <div className="outer">
-                      <div className="inner">
-                        <h1 className="heading changeHead">{item.title}</h1>
-                        <p className="paragraphInThumb">{item.channel.name}</p>
-                        <div className="count paragraphInThumb">
-                          <p>{`${item.view_count} Views`}</p>
-                          <p>{item.published_at}</p>
+          error ? (
+            <p className="error">Something went wrong. Please try again!</p>
+          ) : (
+            allData.length > 0 && (
+              <div
+                className="ghnj"
+                style={mode ? { backgroundColor: "rgb(0,0,0)" } : null}
+              >
+                {allData.map((item) => (
+                  <Link to={`/video/${item.id}`}>
+                    <div className="BG-container-2">
+                      <img
+                        src={item.thumbnail_url}
+                        alt="thumbnail_url"
+                        className="Video_photo"
+                      />
+                      <div className="outer">
+                        <div className="inner">
+                          <h1 className="heading changeHead">{item.title}</h1>
+                          <p className="paragraphInThumb">
+                            {item.channel.name}
+                          </p>
+                          <div className="count paragraphInThumb">
+                            <p>{`${item.view_count} Views`}</p>
+                            <p>{item.published_at}</p>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
+                  </Link>
+                ))}
+              </div>
+            )
           )
         ) : (
           <div className="loader-container" data-testid="loader">
